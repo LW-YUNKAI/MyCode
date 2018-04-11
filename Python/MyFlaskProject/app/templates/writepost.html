@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Post</h1>
+<h2>Hi, {{user.username}}!</h2>
+<form action="" method="post" name="writepost">
+    {{form.hidden_tag()}}
+    <p>
+        Please enter title:<br>
+        {{form.title(size=40)}}<br>
+    </p>
+    <p>
+        Please enter body:<br>
+        {{form.body(size=400)}}<br>
+    </p>
+    <p><input type="submit" value="post"></p>
+</form>
+{% endblock %}

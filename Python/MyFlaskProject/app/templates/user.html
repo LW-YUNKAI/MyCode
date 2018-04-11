@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Hi, {{user.username}}!</h2>
+{% if g.user.is_authenticated %}
+<div>|<a href="/writepost"> writepost </a>|</div>
+{% endif %}
+{% for post in posts %}
+<div><p>{{post.author.username}} says: {{post.title}}</a> at: {{post.time}}</p></div>
+<div><p>{{post.body}}</p></div><br>
+<div><a href="/disable_post?id={{post.id}}"> delete </a></div>
+{% endfor %}
+{% endblock %}
