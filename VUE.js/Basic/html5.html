@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>test</title>
+</head>
+
+<body>
+    <header>  
+        <h1>h5入门</h1>     
+    </header>  
+    <article>  
+        <h1>h1</h1>  
+        <p>pppp</p>  
+        <aside>  
+            <h1>aside h1</h1>  
+            <p>ppppp</p>  
+        </aside>  
+    </article> 
+  <canvas id="canvas_1" width="200" height="100" style="border:1px solid#000000;">  </canvas>
+  <canvas id="canvas_2" width="200" height="100" style="border:1px solid#000000;">  </canvas>
+  <canvas id="canvas_3" width="200" height="100" style="border:1px solid#000000;">  </canvas>
+  <canvas id="canvas_4" width="200" height="100" style="border:1px solid#000000;">  </canvas>
+  <canvas id="canvas_5" width="250" height="300" style="border:1px solid #d3d3d3;"> </canvas>
+  <command> 定义命令按钮，比如单选按钮、复选框或按钮</command>
+  <figcaption> 定义
+    <!--<figure>-->元素的标题</figcaption>
+
+
+  <mark> 定义带有记号的文本。</mark>
+  <meter> 定义度量衡。仅用于已知最大和最小值的度量。</meter>
+
+  <progress> 定义任何类型的任务的进度。</progress>
+  <br>
+  <rt> 定义字符（中文注音或字符）的解释或发音。</rt>
+  <section> 定义文档中的节（section、区段）。</section>
+  <time> 定义日期或时间。</time>
+  
+  <footer> 定义 section 或 document 的页脚。</footer>
+</body>
+
+</html>
+
+<script>
+    //找到元素,创建对象
+    var canvas_1=document.getElementById("canvas_1").getContext("2d");
+    canvas_1.fillStyle="#FF0000";
+    canvas_1.fillRect(0,0,150,75);
+    
+    var canvas_2=document.getElementById("canvas_2").getContext("2d");
+    canvas_2.fillStyle="#FF0000";
+    canvas_2.arc(95,50,40,0,2*Math.PI);
+    canvas_2.stroke();
+
+    var canvas_3=document.getElementById("canvas_3").getContext("2d");
+    canvas_3.moveTo(0,0);
+    canvas_3.lineTo(200,100);
+    canvas_3.stroke();
+
+    var canvas_4=document.getElementById("canvas_4").getContext("2d");
+    canvas_4.font="30px Arial";
+    canvas_4.strokeText("Hello World",10,50);
+    //drawImage
+    var canvas_5=document.getElementById("canvas_5").getContext("2d");
+    var canvas_5=getElementById("scream");
+    canvas_5.drawImage(img,10,10);
+</script>
