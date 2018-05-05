@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Hi, {{user.username}}! All the Posts are here!</h2>
-{% for post in posts %}
-<div><p><a href="user">{{post.author.username}}</a> says: {{post.title}} at: {{post.time}}</p></div>
-<div><p>{{post.body}}</p></div>
+<div>
+   <h2>Hi, {{user.username}}! All the Posts are here!</h2>
+    {% for post in posts %}
+    <div><p><a href="user">{{post.author.username}}</a> says: {{post.title}} at: {{post.time}}</p></div>
+    <div><p>{{post.body}}</p></div>
+</div>
 {% endfor %}
 {% endblock %}

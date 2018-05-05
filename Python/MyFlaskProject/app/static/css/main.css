@@ -1,0 +1,17 @@
+* {
+  font-family: 'Titillium Web', sans-serif;
+}
+
+html {
+  overflow-y: scroll;
+}
+
+#main {
+  top: 100px;
+  position: fixed;
+  margin: 20px;
+  left: 30%;
+  right: 5%;
+  width: 65%;
+  height: 90%;
+}

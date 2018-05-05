@@ -16,18 +16,6 @@
 			}
 		});
 	}
-	function del_score(score) {
-		$.ajax({
-			url: "/del_score",
-			data: {
-				"score": score
-			},
-			success: function (msg) {
-				//alert(msg['tip']);
-				location.reload();
-			}
-		});
-	}
 </script>
 <div class="turnplate_box">
 	<canvas id="myCanvas" width="300px" height="300px">no</canvas>
@@ -41,7 +29,7 @@
 {% endfor %}
 <div>
 	<button onclick="add_score('10')">add</button>
-	<button onclick="del_score('1')">del</button>
+	<button onclick="add_score('-1')">del</button>
 </div>
 <!-- 更改系统默认弹窗 -->
 	<script type="text/javascript">
@@ -85,7 +73,6 @@
 		}
 		alertFram.focus();
 		document.body.onselectstart = function(){return false;};
-
 	}
 	</script>
 {% endblock %}

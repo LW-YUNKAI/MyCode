@@ -8,8 +8,12 @@ from sqlalchemy.sql.elements import or_
 from app import app, login_manager, db
 
 # 定义路径
-from app.form import LoginForm, RegisterForm, PostForm
+from app.form import PostForm
 from app.models import User, Post, Gift
+
+from app.services import *
+
+data = {}
 
 
 @app.before_request
@@ -42,32 +46,29 @@ def load_user(id):
     return User.query.get(int(id))
 
 
+# ===============================================================================
+# 用户登录
+# ===============================================================================
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    form = LoginForm()
-    username = form.username.data
-    password = form.password.data
     # validate_on_submit 函数进行了表单验证，成功返回true
     if request.method == 'POST':
-        user = User.query.filter_by(username=username).first()
-        if form.validate_on_submit():
-            if user is not None and user.verify_password(password):
-                login_user(user)
-                flash('Login successfully！Welcome!' + str(user.username), 'success')
-                return redirect(url_for('index'))
-            else:
-                flash('Error！Username or password incorrect.', 'danger')
-    return render_template('login.html',
-                           title='login',
-                           form=form)
+        email = request.form['email']
+        password = request.form['password']
+        user = User.query.filter_by(email=email).first()
+
+        if user is not None and user.verify_password(password):
+            login_user(user)
+            flash('Login successfully！Welcome!' + str(user.username), 'success')
+            return redirect(url_for('index'))
+        else:
+            flash('Error！Username or password incorrect.', 'danger')
+    return render_template('login.html', title='login')
 
 
-@login_manager.user_loader
-def load_user(id):
-    return User.query.get(int(id))
-
-
+# ===============================================================================
 # 用户注销
+# ===============================================================================
 @app.route('/logout')
 @login_required
 def logout():
@@ -77,26 +78,24 @@ def logout():
     return redirect(url_for('login'))
 
 
+# ===============================================================================
 # 用户注册
+# ===============================================================================
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    form = RegisterForm()
     if request.method == 'POST':
-        # print(login_form.username.data)
-        username = form.username.data
-        password = form.password.data
-        email = form.email.data
-        if form.validate_on_submit():
-            user = User.query.filter(or_(User.username == username, User.email == email)).first()
-            if user is None:
-                User.insert_user(username=username, password=password, email=email)
-                flash('Register successfully!', 'success')
-                return redirect(url_for('login'))
-            else:
-                flash('Error! The username or email has already been registered.', 'danger')
+        email = request.form['email']
+        password = request.form['password']
+        username = request.form['first_name'] + request.form['last_name']
+        user = User.query.filter(or_(User.username == username, User.email == email)).first()
+        if user is None:
+            User.insert_user(username=username, password=password, email=email)
+            flash('Register successfully!', 'success')
+            return redirect(url_for('login'))
+        else:
+            flash('Error! The username or email has already been registered.', 'danger')
     return render_template('register.html',
-                           title='register',
-                           form=form)
+                           title='register')
 
 
 # 发布post
@@ -195,16 +194,6 @@ def add_score():
 
 
 # ===============================================================================
-# 为用户添加分数
-# ===============================================================================
-def user_add_score(id, score):
-    user = User.query.filter_by(id=id).one()
-    new_score = user.score + score
-    db.session.query(User).filter_by(id=id).update({User.score: new_score})
-    db.session.commit()
-
-
-# ===============================================================================
 # 抽奖转盘
 # ===============================================================================
 @app.route('/roll')
@@ -274,3 +263,12 @@ def roll():
         pass
     # 奖品设置为已经抽中
     return jsonify(gift_code=gift_code)
+
+
+# ===============================================================================
+# playground
+# ===============================================================================
+@app.route('/playground')
+def playground():
+    data['user'] = g.user
+    return render_template('playground.html', data=data)
