@@ -1,0 +1,41 @@
+<!--当网页被加载时，浏览器会创建页面的文档对象模型（Document Object Model）。
+    HTML DOM 模型被构造为对象的树
+    JavaScript 能够对页面中的所有事件做出反应-->
+<!DOCTYPE html>
+<html>
+
+<body onload="OnloadTest()">
+
+  <h1 onclick="this.innerHTML='谢谢!'">请点击该文本</h1>
+
+  <div id="div1">
+    <ul id='p1' onclick="addLi()">
+      <li>改变 HTML 输出流</li>
+      <li>document.write(Date());</li>
+    </ul>
+    <ul ondblclick="delLi()">
+      <li>改变 HTML 内容</li>
+      <li>document.getElementById(id).innerHTML="New text!"</li>
+    </ul>
+    <ul>
+      <li>改变 HTML 属性</li>
+      <li>document.getElementById("Image1").src="landscape.jpg";</li>
+    </ul>
+    <ul id="fuc" onclick="addPerson()">
+      function
+    </ul>
+    <ul id="Str">
+      <li id="match" onclick="strMatch()">Hello world!</li>
+      <li id="replace" onclick="strReplace()">Hello world!</li>
+    </ul>
+  </div>
+
+  <input type="button" value="隐藏文本" onclick="document.getElementById('p1').style.visibility='hidden'" />
+  <input type="button" value="显示文本" onclick="document.getElementById('p1').style.visibility='visible'" />
+  
+  <p onclick="wudandandashibi()">cookie</p>
+</body>
+
+<script type="text/javascript" src="learn.js"></script>
+
+</html>
